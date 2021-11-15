@@ -4,6 +4,7 @@ const bcryptjs = require( 'bcryptjs' );
 const Usuario = require( '../models/usuario' );
 const { discriminators } = require('../models/usuario');
 const usuario = require('../models/usuario');
+const { JsonWebTokenError } = require('jsonwebtoken');
 
 const usuariosGet = async( req = request, res = response ) => {
     // const { q, nombre = 'Nameless', edad, page = 1, limit } = req.query;
@@ -69,7 +70,6 @@ const usuariosPut = async( req, res ) => {
     const { id } = req.params;
     const { _id, password, google, ...resto } = req.body;
 
-    // TODO Validar contra base de datos.
     if( password ){
         // Encriptar la contraseña,
         const salt = bcryptjs.genSaltSync();
@@ -81,14 +81,16 @@ const usuariosPut = async( req, res ) => {
     res.json( usuario );
 }
 
-const usuariosPatch = ( req, res ) => {
-    res.json( {
-        msg: 'patch API - controlador'
-    } );
-}
+// const usuariosPatch = ( req, res ) => {
+//     res.json( {
+//         msg: 'patch API - controlador'
+//     } );
+// }
 
 const usuariosDelete = async( req, res ) => {
     const { id } = req.params;
+
+    const uid = req.uid;
 
     // Eliminiación física.
     // const usuario = await Usuario.findByIdAndDelete( id );
@@ -96,7 +98,8 @@ const usuariosDelete = async( req, res ) => {
     // Eliminación lógica.
     const usuario = await Usuario.findByIdAndUpdate( id, { estado: false } );
 
-    
+    // Prueba para demostrar que se puede tener acceso al uid que viene de validar-jwt.js
+    // res.json( { usuario, uid } );
     res.json( usuario );
 }
 
@@ -104,6 +107,6 @@ module.exports = {
     usuariosGet,
     usuariosPost,
     usuariosPut,
-    usuariosPatch,
+    // usuariosPatch,
     usuariosDelete
 }
