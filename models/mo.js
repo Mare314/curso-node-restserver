@@ -2,7 +2,7 @@ const { Schema, model } = require( 'mongoose' );
 
 const moSchema = Schema( {
     MO: {
-        type: Number,
+        type: String,
         required: [ true, 'El campo es obligatorio.' ]
     },
     arnes: {
@@ -17,6 +17,9 @@ const moSchema = Schema( {
         type: Boolean,
         default: true
     }
+},
+{
+    collection: 'mos'
 } );
 
 moSchema.methods.toJSON = function() {

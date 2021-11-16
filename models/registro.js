@@ -25,7 +25,7 @@ const registroSchema = Schema( {
         required: [ true, 'La cantidad es obligatoria.']
     },
     mo: {
-        type: Number,
+        type: String,
         required: [ true, 'La MO es obligatoria.' ]
     },
     fecha: {

@@ -9,8 +9,10 @@ class Server {
 
         this.usuariosPath = '/api/usuarios';
         this.authPath =     '/api/auth';
-        this.arnesesPath = '/api/arneses';
-        this.moPath = '/api/mo';
+        this.arnesesPath =  '/api/arneses';
+        this.moPath =       '/api/mo';
+        this.personalPath = '/api/personal';
+        this.registroPath = '/api/registro';
 
         // Conectar a base de datos
         this.conectarDB();
@@ -43,6 +45,8 @@ class Server {
         this.app.use( this.authPath, require( '../routes/auth.routes' ) );
         this.app.use( this.arnesesPath, require( '../routes/arnes.routes' ) );
         this.app.use( this.moPath, require( '../routes/mo.routes' ) );
+        this.app.use( this.personalPath, require( '../routes/personal.routes' ) );
+        this.app.use( this.registroPath, require( '../routes/registro.routes' ) );
     }
 
     listen() {

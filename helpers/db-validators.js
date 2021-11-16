@@ -3,6 +3,8 @@ const MO = require( '../models/mo' );
 const Actividad = require( '../models/actividad' );
 const Role = require( '../models/role' );
 const Usuario = require( '../models/usuario' );
+const Personal = require('../models/personal');
+const Registro = require('../models/registro');
 
 const esRolValido = async( rol = '' ) => {
     const existeRol = await Role.findOne( { rol } );
@@ -66,6 +68,38 @@ const esActividadValida = async( actividad = '' ) => {
     }
 }
 
+const personalIDExiste = async( id ) => {
+    const existePersonal = await Personal.findById( id );
+
+    if( !existePersonal ){
+        throw new Error( `No existe personal con el ID ${ id }.` );
+    }
+}
+
+const registroIDExiste = async( id ) => {
+    const existeRegistro = await Registro.findById( id );
+
+    if( !existeRegistro ){
+        throw new Error( `No existe registro con el ID ${ id }.` );
+    }
+}
+
+const personalExiste = async( personal = '' ) => {
+    const existePersonal = await Personal.findOne( { personal } );
+
+    if( !existePersonal ){
+        throw new Error( `El operador ${ personal } no está registrado en la base de datos.` );
+    }
+}
+
+const moExiste = async( mo = '' ) => {
+    const existeMO = await MO.findOne( { mo } );
+
+    if( !existeMO ){
+        throw new Error( `La MO ${ mo } no está dada de alta en la base de datos.` );
+    }
+}
+
 module.exports = {
     esRolValido,
     correoExiste,
@@ -74,5 +108,9 @@ module.exports = {
     moIDExiste,
     clienteExiste,
     arnesExiste,
-    esActividadValida
+    esActividadValida,
+    personalIDExiste,
+    registroIDExiste,
+    personalExiste,
+    moExiste
 }

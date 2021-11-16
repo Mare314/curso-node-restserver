@@ -3,31 +3,31 @@ const { check } = require( 'express-validator' );
 
 const { validarCampos } = require( '../middlewares/validar-campos' );
 
-const { moIDExiste, clienteExiste, arnesExiste } = require( '../helpers/db-validators' );
+const { personalIDExiste } = require('../helpers/db-validators');
 
-const { moGet, moPost, moPut, moDelete } = require( '../controllers/mo.controller' );
+const { personalGet, personalPost, personalPut, personalDelete } = require( '../controllers/personal.controller' );
 
 const router = Router();
 
 router.get( '/', [
     validarCampos
-], moGet );
+], personalGet );
 
 router.put( '/:id', [
     check( 'id', 'No es un id válido.' ).isMongoId(),
-    check( 'id' ).custom( moIDExiste ),
+    check( 'id' ).custom( personalIDExiste ),
     validarCampos
-], moPut );
+], personalPut );
 
 router.post( '/', [
     check( 'nombre', 'El nombre es obligatorio.' ).not().isEmpty(),
     validarCampos
-], moPost );
+], personalPost );
 
 router.delete( '/:id', [
     check( 'id', 'No es un id válido.' ).isMongoId(),
-    check( 'id' ).custom( moIDExiste ),
+    check( 'id' ).custom( personalIDExiste ),
     validarCampos
-], moDelete );
+], personalDelete );
 
 module.exports = router;

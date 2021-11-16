@@ -25,7 +25,6 @@ router.put( '/:id', [
 
 router.post( '/', [
     check( 'MO', 'La MO es obligatoria.' ).not().isEmpty(),
-    check( 'MO', 'La MO debe ser numérica' ).isNumeric(),
     // check( 'MO', 'La MO debe contener 10 caracteres' ).isLength( { min: 10 } ),
     check( 'cliente', 'El cliente es obligatorio.' ).not().isEmpty(),
     check( 'cliente' ).custom( clienteExiste ),
