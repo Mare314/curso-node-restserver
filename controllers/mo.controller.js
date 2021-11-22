@@ -19,8 +19,8 @@ const moGet = async( req = request, res = response ) => {
 }
 
 const moPost = async( req, res = response ) => {
-    const { MO, cliente } = req.body
-    const mo = new Mo( { MO, cliente } );
+    const { MO, arnes, cliente } = req.body
+    const mo = new Mo( { MO, arnes, cliente } );
     
     // Guardar en BD.
     await mo.save();
