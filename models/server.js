@@ -31,7 +31,12 @@ class Server {
 
     middlewares() {
         // CORS
-        this.app.use( cors() );
+        // const origen = '*';
+        const origen = 'localhost:8100/';
+        this.app.use( cors( {
+            "origin": origen,
+            "methods": "GET,PUT,POST,DELETE"
+        } ) );
 
         // Lectura y parseo del body
         this.app.use( express.json() );
