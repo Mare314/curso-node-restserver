@@ -31,9 +31,9 @@ class Server {
 
     middlewares() {
         // CORS
-        // const origen = '*';
+        const origen = '*';
         // const origen = 'localhost:8100/';
-        const origen = 'https://gollet-electronics.herokuapp.com/*';
+        // const origen = 'https://gollet-electronics.herokuapp.com/*';
         this.app.use( cors( {
             "origin": origen,
             "methods": "GET,PUT,POST,DELETE"
